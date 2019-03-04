@@ -27,7 +27,9 @@ return [
 					'file' => 'File',
 					'reg_no' => 'Registration #',
 					'sender' => 'Sender',
-					'receiver' => 'Receiver'
+					'receiver' => 'Receiver',
+					'from' => 'From',
+					'sent_to' => 'Sent To'
 			],
 	],
 	'qa_create' => 'Create',

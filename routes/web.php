@@ -27,9 +27,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::post('users_mass_destroy', ['uses' => 'Admin\UsersController@massDestroy', 'as' => 'users.mass_destroy']);
 
     Route::resource('documents', 'Admin\DocumentController');
-    Route::get('sent_documents', ['uses' => 'Admin\DocumentController@sent', 'as' => 'documents.sent']);
-
-
+    Route::resource('sent_documents', 'Admin\SentDocumentController');
 
 
 });

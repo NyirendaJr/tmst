@@ -38,7 +38,7 @@
               @endif
               @lang('quickadmin.documents.dev_received_document')
             </a>
-            <a class="list-group-item" href="{{ url('/sent_documents')}}">
+            <a class="list-group-item" href="{{ route('admin.sent_documents.index')}}">
               @if ($sent_documents->count() > 0)
                 <span class="badge">{{$sent_documents->count()}}</span>
               @else
