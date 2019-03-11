@@ -7,12 +7,6 @@
       <small>Received</small>
     </h3>
 
-    @can('crm_document_create')
-    <p>
-        <a href="{{ route('admin.crm_documents.create') }}" class="btn btn-success">@lang('quickadmin.qa_add_new')</a>
-    </p>
-    @endcan
-
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('quickadmin.qa_list')
@@ -44,7 +38,6 @@
                                 {{-- @endcan --}}
 
                                 <td field-key='title'>{{ $crm_document->title }}</td>
-                                {{-- <td field-key='description'></td> --}}
                                 <td field-key='sender_id'>{{ $crm_document->name }}</td>
                                 <td field-key='file'>{{ $crm_document->file }}</td>
 

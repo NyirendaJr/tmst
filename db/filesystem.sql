@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2019 at 03:45 PM
+-- Generation Time: Mar 11, 2019 at 01:27 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -25,6 +25,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `document_id` int(10) UNSIGNED NOT NULL,
+  `user_reg_no` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `accessor` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `documents`
 --
 
@@ -38,6 +54,14 @@ CREATE TABLE `documents` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `documents`
+--
+
+INSERT INTO `documents` (`id`, `title`, `description`, `sender_id`, `receiver_id`, `file`, `created_at`, `updated_at`) VALUES
+(9, 'Lorem Ipsum is simply dummy text', 'test', 'MKS1992', 'MKS1954', '1551731619-modelcv.pdf', '2019-03-05 04:33:39', '2019-03-05 04:33:39'),
+(10, 'My Report', 'test', 'MKS1994', 'MKS1954', '1551978115-Copy of Staff Plan - 2018 final.xls', '2019-03-08 01:01:55', '2019-03-08 01:01:55');
 
 -- --------------------------------------------------------
 
@@ -61,7 +85,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_02_27_152859_create_1551274139_roles_table', 1),
 (4, '2019_02_27_152903_create_1551274142_users_table', 1),
 (5, '2019_02_27_152904_add_5c7690a47a0cc_relationships_to_user_table', 1),
-(6, '2019_02_27_192547_create_documents_table', 2);
+(6, '2019_02_27_192547_create_documents_table', 2),
+(7, '2019_03_11_141745_create_comments_table', 3);
 
 -- --------------------------------------------------------
 
@@ -121,13 +146,20 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `reg_no`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role_id`) VALUES
-(2, 'NyirendaJr', 'MKS1992', 'javaxynyirenda@gmail.com', NULL, '$2y$10$CmcwFlMaMIse1Ws2lQGPS.NCn3vnzulZ8cNtxKid1lppIe3ZZBsq.', '77cYszQGYmYizjBfp1dofkYOL4oNTVz7BVo6EahppEKFCMFznRoGqmwOzA33', '2019-02-28 01:46:51', '2019-02-28 01:46:51', 1),
-(8, 'JavaxyJr', 'MKS1994', 'johnnyirenda60@gmail.com', NULL, '$2y$10$ylKw/1p9X0wRedY95vdnCurOy5VBNbjScNGyxSvfLl1UM4a26fWE.', 'shwAm7byGQVErR89AY1mJZ4vLAXb8IUwotQ8VRH1AamTF2WCNQlhPevBiZxs', '2019-03-02 02:44:01', '2019-03-02 02:44:01', 1),
+(2, 'NyirendaJr', 'MKS1992', 'javaxynyirenda@gmail.com', NULL, '$2y$10$CmcwFlMaMIse1Ws2lQGPS.NCn3vnzulZ8cNtxKid1lppIe3ZZBsq.', 'MhzUTKBfDl5CXy5AD8MEKuxMLisFk0xUU1Gtr3aixowxjRLcygyk5SdeLt2l', '2019-02-28 01:46:51', '2019-02-28 01:46:51', 1),
+(8, 'JavaxyJr', 'MKS1994', 'johnnyirenda60@gmail.com', NULL, '$2y$10$ylKw/1p9X0wRedY95vdnCurOy5VBNbjScNGyxSvfLl1UM4a26fWE.', 'c5YCHb0iE1xgqhQD7Jm6fkCsU95clnVJQPVDcku2D1BVnxoMjNq4j3zksNss', '2019-03-02 02:44:01', '2019-03-02 02:44:01', 1),
 (9, 'Managing director', 'MKS1954', 'manager@admin.com', NULL, '$2y$10$zu4RqMluCKq.naQWm4U4cuWKOZBnjej1KXMyTnZ7cvcobedno4BGm', NULL, '2019-03-04 22:32:54', '2019-03-04 22:32:54', 3);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comments_document_id_index` (`document_id`);
 
 --
 -- Indexes for table `documents`
@@ -167,16 +199,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -193,6 +231,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_document_id_foreign` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `users`

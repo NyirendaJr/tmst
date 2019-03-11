@@ -73,9 +73,10 @@ class AuthServiceProvider extends ServiceProvider
 
 
         // Auth Gates for comments
-        Gate::define('write_comment', function ($user){
+        Gate::define('write_comment', function ($user) {
             return in_array($user->role_id, [3]);
         });
+
 
     }
 }
