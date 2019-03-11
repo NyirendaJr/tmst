@@ -1,6 +1,7 @@
 <?php
+
 Route::get('/', function () {
-  return view('welcome');
+  return redirect('/admin/home');;
 });
 
 // Authentication Routes...
@@ -28,6 +29,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
     Route::resource('documents', 'Admin\DocumentController');
     Route::resource('sent_documents', 'Admin\SentDocumentController');
+
+    Route::get('comments/{document_id}/{user_reg_no}', 'Admin\CommentController@writeComment')->name('comments.write_comment');
+    Route::post('comments/store', 'Admin\CommentController@store')->name('comments.store');
 
 
 });

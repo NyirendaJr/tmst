@@ -279,6 +279,7 @@ return [
 	'quickadmin_title' => 'TIMESHEET SYSTEM',
 	'dev_document_management' => 'Document management',
 	'dev_download_document' => 'Download document',
-	'dev_upload_document' => 'Upload document'
+	'dev_upload_document' => 'Upload document',
+	'dev_comment_document' => 'Comment'
 
 ];

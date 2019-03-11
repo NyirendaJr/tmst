@@ -19,6 +19,7 @@
 <script src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.colVis.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script src="{{ url('adminlte/js') }}/bootstrap.min.js"></script>
 <script src="{{ url('adminlte/js') }}/select2.full.min.js"></script>
 <script src="{{ url('adminlte/js') }}/main.js"></script>
@@ -35,9 +36,6 @@
             "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/English.json"
         }
     });
-
-
-
 </script>
 
 <script>
@@ -58,6 +56,19 @@
         $('ul.treeview-menu a').filter(function() {
              return this.href == url;
         }).parentsUntil('.sidebar-menu > .treeview-menu').addClass('menu-open').css('display', 'block');
+
+        //adding document comment
+        $('.comment').click(function(){
+          var documentID = this.id
+          var senderID = $('.sender_id_hidden').val();
+          //var senderID = tr.find('input[name="sender_id_hidden"]').val()
+          console.log(senderID);
+          $.dialog({
+              title: 'Add comment!',
+              type: 'blue',
+              content: 'Simple modal ' + documentID + '-' + senderID,
+          });
+        });
     });
 </script>
 

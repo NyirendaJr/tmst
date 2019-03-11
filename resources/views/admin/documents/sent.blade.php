@@ -6,18 +6,15 @@
       @lang('quickadmin.documents.title')
       <small>Sent</small>
     </h3>
-
     @can('crm_document_create')
     <p>
         <a href="{{ route('admin.crm_documents.create') }}" class="btn btn-success">@lang('quickadmin.qa_add_new')</a>
     </p>
     @endcan
-
     <div class="panel panel-default">
         <div class="panel-heading">
             @lang('quickadmin.qa_list')
         </div>
-
         <div class="panel-body table-responsive">
             <table class="table table-bordered table-striped {{ count($sent_documents) > 0 ? 'datatable' : '' }} dt-select ">
                 <thead>
@@ -27,14 +24,13 @@
                         {{-- @endcan --}}
 
                         <th>@lang('quickadmin.documents.fields.title')</th>
-                        <th>@lang('quickadmin.documents.fields.description')</th>
+                        {{-- <th>@lang('quickadmin.documents.fields.description')</th> --}}
                         <th>@lang('quickadmin.documents.fields.sent_to')</th>
                         <th>@lang('quickadmin.documents.fields.file')</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     @if (count($sent_documents) > 0)
                         @foreach ($sent_documents as $crm_document)
@@ -44,20 +40,21 @@
                                 {{-- @endcan --}}
 
                                 <td field-key='title'>{{ $crm_document->title }}</td>
-                                <td field-key='description'></td>
+                                {{-- <td field-key='description'></td> --}}
                                 <td field-key='receiver_id'>{{ $crm_document->receiver_id }}</td>
                                 <td field-key='file'>{{ $crm_document->file }}</td>
 
                                 <td field-key='file'>
                                   @if($crm_document->file)
                                     <a href="{{ asset(env('UPLOAD_PATH').'files/' . $crm_document->file) }}" target="_blank">
+                                      Download
                                       <i class="fas fa-file-download"></i>
                                     </a>
                                   @endif
                                 </td>
                                 <td>
                                     {{-- @can('crm_document_view') --}}
-                                    <a href="{{ route('admin.documents.show',[$crm_document->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                    <a href="{{ route('admin.comments.write_comment',[$crm_document->id, $crm_document->sender_id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
                                     {{-- @endcan --}}
                                     {{-- @can('crm_document_edit') --}}
                                     <a href="{{ route('admin.documents.edit',[$crm_document->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
@@ -72,7 +69,6 @@
                                     {!! Form::close() !!}
                                     {{-- @endcan --}}
                                 </td>
-
                             </tr>
                         @endforeach
                     @else

@@ -54,7 +54,8 @@ class SentDocumentController extends Controller
      */
     public function show($id)
     {
-        //
+        $document = $this->interface->showDocument($id);
+        return view('Admin.documents.show');
     }
 
     /**

@@ -27,7 +27,7 @@
                         {{-- @endcan --}}
 
                         <th>@lang('quickadmin.documents.fields.title')</th>
-                        <th>@lang('quickadmin.documents.fields.description')</th>
+                        {{-- <th>@lang('quickadmin.documents.fields.description')</th> --}}
                         <th>@lang('quickadmin.documents.fields.sender')</th>
                         <th>@lang('quickadmin.documents.fields.file')</th>
                         <th>&nbsp;</th>
@@ -44,7 +44,7 @@
                                 {{-- @endcan --}}
 
                                 <td field-key='title'>{{ $crm_document->title }}</td>
-                                <td field-key='description'></td>
+                                {{-- <td field-key='description'></td> --}}
                                 <td field-key='sender_id'>{{ $crm_document->name }}</td>
                                 <td field-key='file'>{{ $crm_document->file }}</td>
 
@@ -52,15 +52,21 @@
                                   @if($crm_document->file)
                                     <a href="{{ asset(env('UPLOAD_PATH').'files/' . $crm_document->file) }}" target="_blank">
                                       <i class="fas fa-file-download"></i>
+                                      Download
                                     </a>
                                   @endif
                                 </td>
                                 <td>
                                     {{-- @can('crm_document_view') --}}
-                                    <a href="{{ route('admin.documents.show',[$crm_document->id]) }}" class="btn btn-xs btn-primary">@lang('quickadmin.qa_view')</a>
+                                    <a href="{{ route('admin.documents.show',[$crm_document->id]) }}" class="btn btn-xs btn-primary">
+                                      @lang('quickadmin.qa_view')
+                                    </a>
                                     {{-- @endcan --}}
                                     {{-- @can('crm_document_edit') --}}
-                                    <a href="{{ route('admin.documents.edit',[$crm_document->id]) }}" class="btn btn-xs btn-info">@lang('quickadmin.qa_edit')</a>
+                                    <a href="{{ route('admin.comments.write_comment',[$crm_document->id, $crm_document->sender_id]) }}" class="btn btn-xs btn-info">
+                                      @lang('quickadmin.dev_comment_document')
+                                    </a>
+                                    {!! Form::hidden('sender_id_hidden', $crm_document->sender_id) !!}
                                     {{-- @endcan --}}
                                     {{-- @can('crm_document_delete') --}}
                                     {!! Form::open(array(

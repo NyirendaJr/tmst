@@ -36,9 +36,6 @@ class DocumentController extends Controller
       return view('admin.documents.index', compact('received_documents'));
     }
 
-    public function sent(){
-      return $sent_documents = $this->interface->getSentDocument();
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -92,7 +89,8 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        //
+        $document = $this->interface->showDocument($id);
+        return view('Admin.documents.show', compact('document'));
     }
 
     /**

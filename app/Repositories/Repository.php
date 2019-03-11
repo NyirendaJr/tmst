@@ -33,6 +33,11 @@ class Repository implements RepositoryInterface {
     return $sent_documents;
   }
 
+  public function showDocument($id){
+    $document = Document::find($id);
+    return $document;
+  }
+
 }
 
 
